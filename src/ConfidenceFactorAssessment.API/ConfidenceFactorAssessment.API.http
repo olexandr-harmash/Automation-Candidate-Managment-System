@@ -1,0 +1,6 @@
+@ConfidenceFactorAssessment.API_HostAddress = http://localhost:5138
+
+GET {{ConfidenceFactorAssessment.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
