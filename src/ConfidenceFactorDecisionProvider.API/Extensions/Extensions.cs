@@ -1,12 +1,17 @@
 using  StrategyProvider.Extensions;
 using ConfidenceFactorDecisionProvider.API.Strategies;
+using ConfidenceFactorDecisionProvider.API.Controllers;
 
 namespace ConfidenceFactorDecisionProvider.API.Extensions;
 
 public static class Extensions
 {
-    public static IHostApplicationBuilder AddDecisionProvider(this IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder AddApplicationServices(this IHostApplicationBuilder builder)
     {
+        builder.Services.AddControllers();
+
+        builder.Services.AddScoped<DecisionProviderServices>();
+
         builder.AddStrategyProvider()
             .AddDecisionStrategy<IConfidenceFactorAssessmentStrategy, ConfidenceFactorAssessmentStrategyStub>();
 
@@ -14,7 +19,7 @@ public static class Extensions
             builder.Configuration.GetSection(DecisionProviderServiceOptions.Section)
         );
 
-        builder.Services.AddScoped<IDecisionProviderService>();
+        builder.Services.AddScoped<DecisionProviderService>();
 
         return builder;
     }
